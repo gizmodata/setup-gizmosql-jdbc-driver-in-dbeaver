@@ -1,12 +1,12 @@
 # How to set up DBeaver Community Edition (on MacOS) to use the Apache Arrow Flight SQL JDBC Driver
 
-[<img src="https://img.shields.io/badge/dockerhub-flight--sql%20image-green.svg?logo=Docker">](https://hub.docker.com/r/voltrondata/flight-sql)
-[<img src="https://img.shields.io/badge/GitHub-voltrondata%2Fflight--sql--server--example-blue.svg?logo=Github">](https://github.com/voltrondata/flight-sql-server-example)
+[<img src="https://img.shields.io/badge/dockerhub-image-green.svg?logo=Docker">](https://hub.docker.com/r/gizmodata/gizmosql)
+[<img src="https://img.shields.io/badge/GitHub-gizmodata%2Fgizmosql--public-blue.svg?logo=Github">](https://github.com/gizmodata/gizmosql-public)
 [<img src="https://img.shields.io/badge/Arrow%20JDBC%20Driver-download%20artifact-red?logo=Apache%20Maven">](https://search.maven.org/search?q=a:flight-sql-jdbc-driver)
 
 ## Here are the steps:   
 
-1. Make sure you have access to a running Flight SQL server - you can use [this repo](https://github.com/voltrondata/flight-sql-server-example) to easily start one if you do not have one running.
+1. Make sure you have access to a running Arrow Flight SQL server - you can use [this repo](https://github.com/gizmodata/gizmosql) to easily start one if you do not have one running.
 
 
 2. Download DBeaver Community Edition if you haven't already - [here](https://dbeaver.io)  
@@ -29,7 +29,7 @@
 7. Add the JDBC jar file:  
    1. Click the "Libraries" tab  
    1. Click the: "Add File" button   
-   1. Choose the "flight-sql-jdbc-driver-11.0.0.jar" jar file (the file downloaded in step 3 above) - and click "Open"   
+   1. Choose the "flight-sql-jdbc-driver-x.x.x.jar" jar file (the file downloaded in step 3 above) - and click "Open"   
    ![Select jar file](images/select_driver_jar_file.png?raw=true "Select jar file")   
    1. Close the Driver editor window with the blue "OK" button on the lower-right   
 
@@ -52,7 +52,7 @@
    1. Choose the ```Apache Arrow Flight SQL``` driver - your window should look like this:   
    ![Connect to a database window](images/database_selection_window.png?raw=true "Connect to a database window")   
    1. Click the blue "Next >" button on the bottom of the window
-   1. On the next screen, the JDBC URL should be filled out already - just supply the Host (`localhost`), Port (`31337`), Username (`flight_username`), and Password values for your running Flight SQL server.  Your window should look like this:   
+   1. On the next screen, the JDBC URL should be filled out already - just supply the Host (`localhost`), Port (`31337`), Username (`gizmosql_username`), and Password values for your running Flight SQL server.  Your window should look like this:   
    ![Connect to a database window 2](images/database_settings_window.png?raw=true "Connect to a database window 2")
    1. Click the "Test Connection" button - your window should look like this:   
    ![Test Connection results](images/test_connection_button_results.png?raw=true "Test Connection results")   
