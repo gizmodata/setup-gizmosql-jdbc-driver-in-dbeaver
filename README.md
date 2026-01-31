@@ -1,76 +1,97 @@
-# How to set up DBeaver Community Edition (on MacOS) to use the Apache Arrow Flight SQL JDBC Driver
+# Setting Up DBeaver with the GizmoSQL JDBC Driver (macOS)
 
 [<img src="https://img.shields.io/badge/dockerhub-image-green.svg?logo=Docker">](https://hub.docker.com/r/gizmodata/gizmosql)
-[<img src="https://img.shields.io/badge/GitHub-gizmodata%2Fgizmosql--public-blue.svg?logo=Github">](https://github.com/gizmodata/gizmosql-public)
-[<img src="https://img.shields.io/badge/Arrow%20JDBC%20Driver-download%20artifact-red?logo=Apache%20Maven">](https://search.maven.org/search?q=a:flight-sql-jdbc-driver)
+[<img src="https://img.shields.io/badge/GitHub-gizmodata%2Fgizmosql-blue.svg?logo=Github">](https://github.com/gizmodata/gizmosql)
+[![JDBC Driver](https://img.shields.io/badge/GizmoSQL%20JDBC%20Driver-download%20artifact-red?logo=Apache%20Maven)](https://downloads.gizmodata.com/gizmosql-jdbc-driver/latest/gizmosql-jdbc-driver.jar)
 
-## Here are the steps:   
+## Prerequisites
 
-1. Make sure you have access to a running Arrow Flight SQL server - you can use [this repo](https://github.com/gizmodata/gizmosql) to easily start one if you do not have one running.
+1. A running GizmoSQL server — you can use [this repo](https://github.com/gizmodata/gizmosql) to start one.
+2. [DBeaver Community Edition](https://dbeaver.io) installed.
+3. The [GizmoSQL JDBC driver](https://downloads.gizmodata.com/gizmosql-jdbc-driver/latest/gizmosql-jdbc-driver.jar) jar file downloaded.
 
+## Configure the JDBC Driver
 
-2. Download DBeaver Community Edition if you haven't already - [here](https://dbeaver.io)  
+1. Launch DBeaver.
 
+2. Open **Database > Driver Manager** from the menu bar:
 
-3. Download the Apache Arrow Flight SQL JDBC driver - [here](https://search.maven.org/search?q=a:flight-sql-jdbc-driver) - choose the "jar" option.     
+   <img src="images/dbeaver_database_driver_manager_menu_option.png?raw=true" alt="Driver Manager menu option" width="600">
 
+3. Click the **New** button:
 
-4. Launch DBeaver  
+   <img src="images/driver_manager_new_button.png?raw=true" alt="Driver Manager New button" width="600">
 
+4. Add the JDBC jar file:
+   1. Click the **Libraries** tab.
+   2. Click **Add File**, select the `gizmosql-jdbc-driver-x.x.x.jar` file downloaded earlier, and click **Open**.
 
-5. In the DBeaver application menu bar, open the "Database" menu and choose: "Driver Manager":      
-![Driver manager menu option](images/dbeaver_database_driver_manager_menu_option.png?raw=true "Driver manager menu option")   
+      <img src="images/select_driver_jar_file.png?raw=true" alt="Select jar file" width="600">
 
+   3. Click **Find Class** — the value `org.apache.arrow.driver.jdbc.ArrowFlightJdbcDriver` should populate automatically:
 
-6. Click the "New" button on the right:     
-![Driver manager new button](images/driver_manager_new_button.png?raw=true "Driver manager new button")   
+      <img src="images/class_path.png?raw=true" alt="Driver class path" width="600">
 
+5. Configure the driver settings:
+   1. Click the **Settings** tab.
+   2. Fill in the following fields:
 
-7. Add the JDBC jar file:  
-   1. Click the "Libraries" tab  
-   1. Click the: "Add File" button   
-   1. Choose the "flight-sql-jdbc-driver-x.x.x.jar" jar file (the file downloaded in step 3 above) - and click "Open"   
-   ![Select jar file](images/select_driver_jar_file.png?raw=true "Select jar file")   
-   1. Close the Driver editor window with the blue "OK" button on the lower-right   
+      | Field | Value |
+      |---|---|
+      | **Driver Name** | `GizmoSQL` |
+      | **Class Name** | `org.apache.arrow.driver.jdbc.ArrowFlightJdbcDriver` |
+      | **URL Template** | `jdbc:gizmosql://{host}:{port}?useEncryption=true&disableCertificateVerification=true` |
+      | **Driver Type** | `Generic` |
+      | **Default Port** | `31337` (optional) |
 
+      Your window should look like this:
 
-8. Enter the driver settings:   
-   1. Click the "Settings" tab   
-   1. In the "Driver Name" field - enter: ```Apache Arrow Flight SQL```   
-   1. In the "URL Template" field - enter: ```jdbc:arrow-flight-sql://{host}:{port}?useEncryption=true&disableCertificateVerification=true```   
-   1. In the "Driver Type" drop-down box - choose: "SQLite"   
-   1. Your driver manager "Edit Driver" window should look like this:   
-   ![Driver Manager completed](images/driver_manager_completed_window.png?raw=true "Driver Manager completed")   
-   1. Click the blue "OK" button on the lower-right to save the driver   
-   1. Close the "Driver Manager" window by clicking the blue "Close" button on the lower-right.
+      <img src="images/driver_manager_completed_window.png?raw=true" alt="Driver Manager completed" width="600">
 
-   
-9. Create a new Database Connection:   
-   1. In the DBeaver application menu bar, open the "Database" menu and choose: "New Database Connection":   
-   ![New Database Connection](images/new_database_connection_menu_option.png?raw=true "New Database Connection")   
-   1. In the "Connect to a database" window - type: ```Flight``` in the search bar   
-   1. Choose the ```Apache Arrow Flight SQL``` driver - your window should look like this:   
-   ![Connect to a database window](images/database_selection_window.png?raw=true "Connect to a database window")   
-   1. Click the blue "Next >" button on the bottom of the window
-   1. On the next screen, the JDBC URL should be filled out already - just supply the Host (`localhost`), Port (`31337`), Username (`gizmosql_username`), and Password values for your running Flight SQL server.  Your window should look like this:   
-   ![Connect to a database window 2](images/database_settings_window.png?raw=true "Connect to a database window 2")
-   1. Click the "Test Connection" button - your window should look like this:   
-   ![Test Connection results](images/test_connection_button_results.png?raw=true "Test Connection results")   
-   1. Click the blue "OK" button to close the Connection test window
-   1. Click the "Connection details (name, type, ...)" button on the right
-   1. In the "General" section, enter: `Apache Arrow Flight SQL` for the "Connection name".  It should look like this:
-   ![Name the Database Connection](images/naming_database_connection.png)
-   1. Click the blue "Finish" button to save the connection   
+   3. Click **OK** to save the driver, then **Close** to exit the Driver Manager.
 
+## Create a Database Connection
 
-10. Run a query:
-    1. Right-click on the Database Connection on the left - choose: "SQL Editor", and then: "Open SQL Console" as shown here:      
-    ![Open SQL Console](images/open_sql_console.png?raw=true "Open SQL Console")   
-    1. In the Console window - run a query - something like: ```SELECT * FROM customer;```   
-    1. Click the triangle button to execute the SQL statement - as shown below (or use keyboard shortcut: Ctrl+Enter):      
-    ![Execute SQL](images/triangle_execute_button.png?raw=true "Execute SQL")   
-    1. You should see the query results as shown in this screenshot:   
-    ![Query Results](images/query_results.png?raw=true "Query Results")   
+1. Open **Database > New Database Connection** from the menu bar:
 
+   <img src="images/new_database_connection_menu_option.png?raw=true" alt="New Database Connection" width="600">
 
-## Congrats - you are all done!
+2. Type `Gizmo` in the search bar and select the **GizmoSQL** driver:
+
+   <img src="images/database_selection_window.png?raw=true" alt="Connect to a database window" width="600">
+
+3. Click **Next >**.
+
+4. Fill in your connection details — Host (e.g. `localhost`), Port (`31337`), Username (`gizmosql_username`), and Password:
+
+   <img src="images/database_settings_window.png?raw=true" alt="Database settings window" width="600">
+
+5. Click **Test Connection** to verify connectivity:
+
+   <img src="images/test_connection_button_results.png?raw=true" alt="Test Connection results" width="600">
+
+6. Click **OK** to close the test results.
+
+7. Click **Connection details (name, type, ...)** on the right and give the connection a name (e.g. `GizmoSQL - tutorial`):
+
+   <img src="images/naming_database_connection.png?raw=true" alt="Name the Database Connection" width="600">
+
+8. Click **Finish** to save the connection.
+
+## Run a Query
+
+1. Right-click the new connection in the sidebar and choose **SQL Editor > Open SQL Console**:
+
+   <img src="images/open_sql_console.png?raw=true" alt="Open SQL Console" width="600">
+
+2. Enter a query, for example: `SELECT * FROM region;`
+
+3. Click the execute button (or press **Ctrl+Enter**):
+
+   <img src="images/triangle_execute_button.png?raw=true" alt="Execute SQL" width="600">
+
+4. You should see the query results:
+
+   <img src="images/query_results.png?raw=true" alt="Query Results" width="600">
+
+## You're all set!
