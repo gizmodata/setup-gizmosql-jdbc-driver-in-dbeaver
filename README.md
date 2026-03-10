@@ -1,4 +1,4 @@
-# Setting Up DBeaver with the GizmoSQL JDBC Driver (macOS)
+# Setting Up DBeaver with the [GizmoSQL](https://github.com/gizmodata/gizmosql) JDBC Driver (macOS)
 
 [<img src="https://img.shields.io/badge/dockerhub-image-green.svg?logo=Docker">](https://hub.docker.com/r/gizmodata/gizmosql)
 [<img src="https://img.shields.io/badge/GitHub-gizmodata%2Fgizmosql-blue.svg?logo=Github">](https://github.com/gizmodata/gizmosql)
