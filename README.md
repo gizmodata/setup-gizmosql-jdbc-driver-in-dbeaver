@@ -62,7 +62,7 @@
 
 3. Click **Next >**.
 
-4. Fill in your connection details — Host (e.g. `localhost`), Port (`31337`), Username (`gizmosql_username`), and Password:
+4. Fill in your connection details — Host (e.g. `localhost`), Port (`31337`), Username (`gizmosql_user`), and Password:
 
    <img src="images/database_settings_window.png?raw=true" alt="Database settings window" width="600">
 
