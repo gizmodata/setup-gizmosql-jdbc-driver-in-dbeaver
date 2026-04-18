@@ -24,7 +24,7 @@
 
 4. Add the JDBC jar file:
    1. Click the **Libraries** tab.
-   2. Click **Add File**, select the `gizmosql-jdbc-driver-x.x.x.jar` file downloaded earlier, and click **Open**.
+   2. Click **Add File**, select the `gizmosql-jdbc-driver.jar` file downloaded earlier, and click **Open**.
 
       <img src="images/select_driver_jar_file.png?raw=true" alt="Select jar file" width="600">
 
